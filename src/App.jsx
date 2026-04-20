@@ -130,7 +130,7 @@ export default function App() {
 
   // ── Approved: Main app ──
   const initial = (user.displayName || user.email || '?').charAt(0).toUpperCase()
-  const isAdmin = userProfile?.isAdmin === true
+  const isAdmin = user.email === 'commtk22732@gmail.com'
 
   return (
     <div className={`min-h-screen p-4 md:p-8 lg:p-10 transition-colors duration-500 ease-in-out

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import {
-  X, Users, Database, Shield, ShieldOff, Trash2,
-  CheckCircle, XCircle, Clock, RefreshCw, ChevronDown, ChevronRight, Eye
+  X, Users, Database, Shield, Trash2,
+  CheckCircle, XCircle, Clock, RefreshCw, ChevronDown, ChevronRight
 } from 'lucide-react'
 import {
-  subscribeAllUsers, updateUserStatus, toggleAdmin,
+  subscribeAllUsers, updateUserStatus,
   deleteUserData, getAllWorkspaces
 } from '../../services/users'
 
@@ -44,7 +44,6 @@ export default function AdminDashboard({ adminUid, onClose }) {
   const handleApprove = (uid) => updateUserStatus(uid, 'approved', adminUid)
   const handleReject  = (uid) => updateUserStatus(uid, 'rejected', adminUid)
   const handlePending = (uid) => updateUserStatus(uid, 'pending',  adminUid)
-  const handleToggleAdmin = (uid, current) => toggleAdmin(uid, !current)
   const handleDelete = async (uid) => {
     await deleteUserData(uid)
     setConfirmDelete(null)
@@ -188,13 +187,6 @@ export default function AdminDashboard({ adminUid, onClose }) {
                           <XCircle size={13} />
                         </ActionBtn>
                       )}
-                      <ActionBtn
-                        onClick={() => handleToggleAdmin(u.uid, u.isAdmin)}
-                        color={u.isAdmin ? 'slate' : 'indigo'}
-                        title={u.isAdmin ? 'ถอนสิทธิ์แอดมิน' : 'ให้สิทธิ์แอดมิน'}
-                      >
-                        {u.isAdmin ? <ShieldOff size={13} /> : <Shield size={13} />}
-                      </ActionBtn>
                       {u.uid !== adminUid && (
                         <ActionBtn onClick={() => setConfirmDelete(u)} color="red" title="ลบข้อมูล">
                           <Trash2 size={13} />
